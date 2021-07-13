@@ -23,4 +23,16 @@
 <hr>
 <h3 id="盘口模板导入后，赔率不能导入、标题类盘口不能导入、盘口配置属性不能导入，导入后的大小，让分盘的组数跟设置中的组数不同，盘口模板导入的赛事无法领盘口，有几率无法审核导入的盘口">3.盘口模板导入后，赔率不能导入、标题类盘口不能导入、盘口配置属性不能导入，导入后的大小，让分盘的组数跟设置中的组数不同，盘口模板导入的赛事无法领盘口，有几率无法审核导入的盘口</h3>
 <h4 id="bug重现">BUG重现</h4>
+<blockquote>
+<p>导入模板之后，胜负盘口的赔率正常，有参数设定的盘口均不正常。</p>
+</blockquote>
+<ol>
+<li>排查：导入之后的参数设定字段<br>
+Title 类型的盘口参数未正确导入<br>
+检查模板：</li>
+</ol>
+<p><code>{ 	"Template":{"Rebate":0.935,"Auto":0.5,"Jump":1,"Limit":1}, 	"Flag":1, 	"Bets":{ 		"Winner":{ 			"PlayCode":"Winner", 			"Items":[			{"Group":0.0000,"Index":0,"Odds":null,"WinRate":0.474809483264},{"Group":0.0000,"Index":1,"Odds":null,"WinRate":0.525190516736} 			], 			"Template":{"Rebate":0.935,"Auto":0.5,"Jump":1,"Limit":1}, 			"Setting":"", 			"Header":{"Items": 				[ 				{"Type":2,"Key":""},"Type":3,"Key":""} 				]}, 			"Flag":0, 			"Maps":null, 			"Group":"" 		}... 	} }</code><br>
+模板中Setting数据正确<br>
+2.  原因：未正确刷新到缓存引起<br>
+<strong>注意：全场玩法不会从模板中加载赔率（全场的赔率来自于单场胜者的赔率联动），此问题不是BUG</strong></p>
 
